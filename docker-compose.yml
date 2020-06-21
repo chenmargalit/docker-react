@@ -1,0 +1,25 @@
+version: '3'
+services:
+  # web is just a made up name, could be anything
+  web:
+    stdin_open: true
+    build:
+      # look into the current folder (aka "."), and find the dockerfile which is Dockerfile.dev
+      context: .
+      dockerfile: Dockerfile.dev
+    ports:
+      - '3000:3000'
+    volumes:
+      # dont do anything special with node_modules
+      - /app/node_modules
+      # map the current folder (".") to the container (app)
+      - .:/app
+  # second container incharge of tests
+  tests:
+    build:
+      context: .
+      dockerfile: Dockerfile.dev
+    volumes:
+      - /app/node_modules
+      - .:/app
+    command: ['npm', 'run', 'test']

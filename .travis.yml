@@ -1,0 +1,29 @@
+# as we're using docker, we need sudo permissions
+sudo: reuqired
+services:
+  # install a copy of docker
+  - docker
+
+before_install:
+  # before u stqrt doing anything (tests/deployment) run the docker image. the extra . is the locaiton (e.g in this directory)
+  # the chenmargalit/doc will allow us to treat the docker container with this name rather then some weird generated id
+  - docker build -t chenmargalit/doc -f Dockerfile.dev .
+
+# what command is needed to do the work?
+script:
+  - docker run -e CI=true chenmargalit/doc npm run test
+
+# deploytment to aws
+deploy:
+  # Travis is pre built to work with aws, it knows what elasticbeanstalk is. All other details come from the aws account
+  provider: elasticbeanstalk
+  region: 'eu-central-1'
+  app: 'docker-react'
+  env: 'DockerReact-env'
+  bucket_name: 'elasticbeanstalk-eu-central-1-413632023774'
+  bucket_path: 'docker-react'
+  # only deploy when pushing to master branch on github, not to feature branch.
+  on:
+    branch: master
+  access_key_id: $AWS_ACCESS_KEY
+  secret_access_key: $AWS_SECRET_KEY
