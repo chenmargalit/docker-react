@@ -6,7 +6,7 @@ function App() {
     <div className='App'>
       <header className='App-header'>
         <a href='_blank'>learn react1</a>
-        <p>wopa123 </p>
+        <p>wopa 12 </p>
       </header>
     </div>
   );
