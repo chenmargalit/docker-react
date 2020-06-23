@@ -4,16 +4,16 @@ services:
   # install a copy of docker
   - docker
 
+  # before u start doing anything (tests/deployment) run the docker image. the extra . is the location (e.g in this directory)
 before_install:
-  # before u stqrt doing anything (tests/deployment) run the docker image. the extra . is the locaiton (e.g in this directory)
   # the chenmargalit/doc will allow us to treat the docker container with this name rather then some weird generated id
-  - docker build -t chenmargalit/doc -f Dockerfile.dev .
+  - docker build -t chenmargalit/docker-react -f Dockerfile.dev .
 
-# what command is needed to do the work?
+# commands that needs to be executed to run the tests
 script:
   - docker run -e CI=true chenmargalit/doc npm run test
 
-# deploytment to aws
+# deployment to aws
 deploy:
   # Travis is pre built to work with aws, it knows what elasticbeanstalk is. All other details come from the aws account
   provider: elasticbeanstalk
