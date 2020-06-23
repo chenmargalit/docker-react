@@ -1,3 +1,5 @@
+language: generic
+
 # as we're using docker, we need sudo permissions
 sudo: reuqired
 services:
