@@ -11,7 +11,7 @@ before_install:
 
 # commands that needs to be executed to run the tests
 script:
-  - docker run -e CI=true chenmargalit/docker-react npm run test
+  - docker run -e CI=true chenmargalit/doc npm run test
 
 # deployment to aws
 deploy:
