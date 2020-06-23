@@ -14,18 +14,17 @@ before_install:
 # commands that needs to be executed to run the tests
 script:
   - docker run -e CI=true chenmargalit/docker-react npm run test
-
-# deployment to aws
-deploy:
-  # Travis is pre built to work with aws, it knows what elasticbeanstalk is. All other details come from the aws account
-  provider: elasticbeanstalk
-  region: 'eu-central-1'
-  app: 'docker-react'
-  env: 'DockerReact-env'
-  bucket_name: 'elasticbeanstalk-eu-central-1-413632023774'
-  bucket_path: 'docker-react'
-  # only deploy when pushing to master branch on github, not to feature branch.
-  on:
-    branch: master
-  access_key_id: $AWS_ACCESS_KEY
-  secret_access_key: $AWS_SECRET_KEY
+# # deployment to aws
+# deploy:
+#   # Travis is pre built to work with aws, it knows what elasticbeanstalk is. All other details come from the aws account
+#   provider: elasticbeanstalk
+#   region: 'eu-central-1'
+#   app: 'docker-react'
+#   env: 'DockerReact-env'
+#   bucket_name: 'elasticbeanstalk-eu-central-1-413632023774'
+#   bucket_path: 'docker-react'
+#   # only deploy when pushing to master branch on github, not to feature branch.
+#   on:
+#     branch: master
+#   access_key_id: $AWS_ACCESS_KEY
+#   secret_access_key: $AWS_SECRET_KEY
